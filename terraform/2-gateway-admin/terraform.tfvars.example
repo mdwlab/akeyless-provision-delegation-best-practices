@@ -1,0 +1,13 @@
+# Use the account admin API key here.
+akeyless_access_id  = "p-xxxxxxxxxxxxxx"
+akeyless_access_key = "REPLACE_ME"
+
+# Root cause of every earlier failure: needs the /api/v2 suffix.
+akeyless_api_gateway_address = "https://gw-condor.mdwlab.org/api/v2"
+cluster_id                   = 63227
+
+cmdb_admin_access_id   = "p-xt99nqlag7dtam" # from global-admin's persona_credentials.cmdb_admin
+cmdb_admin_permissions = "targets,rotated_secret,rotate_secret_value"
+
+region_admin_access_id   = "p-pabg9qld52g5am" # from global-admin's persona_credentials.region_admin
+region_admin_permissions = "targets,rotated_secret,rotate_secret_value"

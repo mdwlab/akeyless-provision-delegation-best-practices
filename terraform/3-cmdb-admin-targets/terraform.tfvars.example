@@ -1,0 +1,29 @@
+# Use the cmdb_admin persona's own API key here (from global-admin's
+# `terraform output -json persona_credentials` -> .cmdb_admin), not the
+# account admin key.
+akeyless_access_id  = "p-xxxxxxxxxxxxxx"
+akeyless_access_key = "REPLACE_ME"
+
+base_path = "/xcorp"
+region    = "cn"
+
+targets = {
+  wayne_condor_postgres_target = {
+    host        = "condor-postgres.example.internal"
+    port        = "5432"
+    db_name     = "condor"
+    user_name   = "wayne"
+    password    = "REPLACE_ME"
+    description = "condor docker based target"
+  }
+  condor_self_rotate_target = {
+    host      = "condor-postgres.example.internal"
+    port      = "5432"
+    db_name   = "condor"
+    user_name = "condor_self_rotate"
+    password  = "REPLACE_ME"
+  }
+}
+
+# Drop the real PEM-encoded SSL/CA certificate at certs/condor-ca.pem before applying.
+ssl_certificate_filename = "condor-ca.pem"

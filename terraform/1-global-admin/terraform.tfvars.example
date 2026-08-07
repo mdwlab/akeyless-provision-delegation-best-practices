@@ -1,0 +1,7 @@
+# Use the account admin API key here, e.g. /devops/tf/api-key-by-terraform.
+akeyless_access_id  = "p-xxxxxxxxxxxxxx"
+akeyless_access_key = "REPLACE_ME"
+
+base_path = "/xcorp"
+region    = "cn"
+app_teams = ["c0001", "c0002"]

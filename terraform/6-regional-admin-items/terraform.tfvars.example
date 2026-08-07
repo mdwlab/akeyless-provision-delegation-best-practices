@@ -1,0 +1,18 @@
+# Use the region_admin persona's own API key here (from global-admin's
+# `terraform output -json persona_credentials` -> .region_admin), not the
+# account admin key.
+akeyless_access_id  = "p-xxxxxxxxxxxxxx"
+akeyless_access_key = "REPLACE_ME"
+
+akeyless_api_gateway_address = "https://gw-condor.mdwlab.org/api/v2"
+
+base_path = "/xcorp"
+region    = "cn"
+
+target_name = "/xcorp/cn/targets/wayne_condor_postgres_target"
+
+c0001_rotated_username = "akeyless_rotated_user_c0001"
+c0001_rotated_password = "REPLACE_ME"
+
+c0002_rotated_username = "akeyless_rotated_user_c0002"
+c0002_rotated_password = "REPLACE_ME"

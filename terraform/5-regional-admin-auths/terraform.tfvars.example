@@ -1,0 +1,9 @@
+# Use the region_admin persona's own API key here (from global-admin's
+# `terraform output -json persona_credentials` -> .region_admin), not the
+# account admin key.
+akeyless_access_id  = "p-xxxxxxxxxxxxxx"
+akeyless_access_key = "REPLACE_ME"
+
+base_path = "/xcorp"
+region    = "cn"
+app_teams = ["c0001", "c0002"]
