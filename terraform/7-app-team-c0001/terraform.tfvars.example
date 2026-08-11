@@ -1,0 +1,4 @@
+# Use app_team_c0001's own API key here (from 5-regional-admin-auths'
+# `terraform output -json persona_credentials` -> .c0001), not an admin key.
+akeyless_access_id  = "p-xxxxxxxxxxxxxx"
+akeyless_access_key = "REPLACE_ME"
