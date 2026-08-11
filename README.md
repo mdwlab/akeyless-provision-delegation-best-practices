@@ -19,6 +19,7 @@ that persona), run in this order:
 | `4-cmdb-admin-items` | cmdb_admin | `condor_postgres_self_rs`, a self-rotating secret against `condor_self_rotate_target` |
 | `5-regional-admin-auths` | region_admin | per-app-team roles/auth-methods (`app_team_c0001`, `app_team_c0002`) under `/xcorp/cn/teams` |
 | `6-regional-admin-items` | region_admin | per-app-team rotated secrets (`condor_postgres_user_rs1`/`rs2`) against `wayne_condor_postgres_target` |
+| `7-app-team-c0001` | app_team_c0001 | nothing — reads `condor_postgres_user_rs1`'s current value via the `akeyless_rotated_secret` data source, proving this persona's read-only RBAC boundary |
 
 Each directory has a `terraform.tfvars.example` — copy to `terraform.tfvars`
 and fill in real credentials/values (gitignored, never committed).
