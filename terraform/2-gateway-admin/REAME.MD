@@ -89,3 +89,17 @@ Applied for real:
 - cmdb_admin_gateway_access: targets,rotated_secret,rotate_secret_value
 - region_admin_gateway_access: targets,rotated_secret,rotate_secret_value
   (widened from targets-only to support 6-regional-admin-items)
+
+GATEWAY IDENTITY'S OWN ROLE
+
+Separate from the allowed-access grants above (which govern who can call
+the gateway), the gateway's own identity — bound to cn_gateway_role in
+1-global-admin — needs its own target-rule permissions:
+- read: the gateway needs the target's stored credentials to make the
+  actual database connection.
+- update: on each scheduled rotation, the gateway writes the new
+  credentials back onto the target.
+
+cn_gateway_role already grants target-rule read/update (bundled into its
+CRUDL rule on /xcorp/cn/*), so no role change was needed — noting this here
+since it's easy to assume the allowed-access grant alone is sufficient.
