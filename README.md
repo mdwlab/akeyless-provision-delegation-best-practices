@@ -1,7 +1,7 @@
 # akeyless-provision-delegation-best-practices
 
 Terraform provisioning for the `/xcorp` path in Akeyless, mirroring the
-console-built `/lilly` structure — a delegated-admin model where each
+console-built example structure — a delegated-admin model where each
 persona gets its own credentials and only the permissions it needs, per
 the account's Security Provision Best Practice doc.
 
