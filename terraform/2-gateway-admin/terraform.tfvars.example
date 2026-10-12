@@ -11,3 +11,6 @@ cmdb_admin_permissions = "targets,rotated_secret,rotate_secret_value"
 
 region_admin_access_id   = "p-pabg9qld52g5am" # from global-admin's persona_credentials.region_admin
 region_admin_permissions = "targets,rotated_secret,rotate_secret_value"
+
+github_actions_access_id   = "p-xxxxxxxxxxxxxx" # devops/github/github-actions-zhuwbigdata-access
+github_actions_permissions = "admin,general"

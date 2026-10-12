@@ -52,6 +52,12 @@ resource "akeyless_role" "gateway" {
 resource "akeyless_role" "region_admin" {
   name = "${var.base_path}/${var.region}/${var.region}_region_admin_role"
 
+  # region_admin can't grant event access it doesn't hold itself (401 when
+  # 5-regional-admin-auths sets these on app-team roles), so it needs at least
+  # Scoped Event Center + Manage Event Forwarders to delegate them.
+  event_center_access     = "scoped"
+  event_forwarders_access = "all"
+
   rules {
     capability = ["read", "list", "update", "delete", "create"]
     path       = "${var.base_path}/${var.region}/*"

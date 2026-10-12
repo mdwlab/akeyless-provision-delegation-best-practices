@@ -36,12 +36,25 @@ Symptoms of getting this wrong look unrelated: `Missing required parameter -
 AccessId`, `404 page not found`, `command is not available on public gateway`.
 Full trail in `terraform/2-gateway-admin/REAME.MD`.
 
-## Event forwarders (researched, not yet implemented)
+## Event forwarders
 
 - RBAC: role needs the **Manage Event Forwarders** admin rule — scope is All, an
-  explicit forwarder name, or a name template like `{{username}}-*`. Scoping is by
-  **forwarder name, not item path**. A plain wildcard without a claim
-  (`xcorp-cn-*`) is undocumented — verify.
+  explicit forwarder name, or a name template. Scoping is by **forwarder name,
+  not item path**. Plain wildcards work: app-team roles in
+  `5-regional-admin-auths` use `event_forwarders_name = ["app_team_<id>_*"]`.
+- Provider/API quirks (verified on provider 2.0.5):
+  - Names are only sent on **create-role**. An in-place update sends just
+    `event_forwarders_access`, which becomes an `event-forwarder-rule` on `/*`
+    (every forwarder). Change names with `-replace` on the role + its
+    `akeyless_associate_role_auth_method`.
+  - create-role rejects `event_forwarders_access` together with
+    `event_forwarders_name` — set names only.
+  - `set-role-rule --rule-type event-forwarder-rule` accepts only `all`/`own`.
+  - Server stores names with a leading `/`, and the provider doesn't detect a
+    missing rule, so plans can look clean while the server differs. Hence
+    `ignore_changes`; verify with `get-role` (`.rules.path_rules`).
+  - region_admin was given `event_center_access`/`event_forwarders_access` in
+    `1-global-admin` after a 401 when it set these on app-team roles.
 - Gateway: identity also needs the `event_forwarding` allowed-access permission.
 - Event Center "Own"/scoped view only controls which events a role can *see*.
 - Forwarders are not items in the tree (`list-items` has no forwarder type); a
@@ -49,8 +62,7 @@ Full trail in `terraform/2-gateway-admin/REAME.MD`.
   folder RBAC. Prefer flat prefixes like `xcorp-cn-c0001-ef`.
 - Open question: whether a delegated user can point a forwarder at a source path
   (`--items-event-source-locations`) outside their own item permissions.
-- Planned: forwarder rule on the region admin role, `event_forwarding` grant in
-  `2-gateway-admin`, and a region_admin step creating a forwarder for
+- Planned: `event_forwarding` grant in `2-gateway-admin`, and a region_admin step creating a forwarder for
   `/xcorp/cn/teams/*` to test the above.
 
 ## Useful checks

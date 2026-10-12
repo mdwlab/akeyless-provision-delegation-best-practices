@@ -43,3 +43,14 @@ variable "region_admin_permissions" {
   type        = string
   default     = "targets,rotated_secret,rotate_secret_value"
 }
+
+variable "github_actions_access_id" {
+  description = "Access ID of the GitHub JWT auth method (devops/github/github-actions-zhuwbigdata-access) used by github-workflow-tf-global-admin. Needs gateway admin capability since its own 2-gateway-admin job calls gateway-create-allowed-access itself — this is the bootstrap grant that makes that possible."
+  type        = string
+}
+
+variable "github_actions_permissions" {
+  description = "Gateway permissions for the GitHub Actions JWT identity. 'admin' rather than targets/rotated_secret, since it manages this gateway's own allowed-access list."
+  type        = string
+  default     = "admin,general"
+}
